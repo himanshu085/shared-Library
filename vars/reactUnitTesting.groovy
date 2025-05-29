@@ -1,5 +1,5 @@
-// vars/reactUnitTesting.groovy
 def call() {
+    echo "[reactUnitTesting] Installing dependencies and running tests..."
     dir('frontend') {
         sh '''
             npm install
