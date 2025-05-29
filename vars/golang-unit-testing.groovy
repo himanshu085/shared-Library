@@ -1,5 +1,7 @@
 def call() {
-    // Your unit testing steps for golang here
-    echo "Running golang unit tests"
-    sh 'go test ./... -v'
+    stage('Unit Tests') {
+        dir('routes') {
+            sh 'go test -v ./... -coverprofile=coverage.out'
+        }
+    }
 }
