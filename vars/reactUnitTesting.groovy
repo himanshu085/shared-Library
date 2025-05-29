@@ -1,10 +1,8 @@
 def call() {
-    echo "[reactUnitTesting] Installing dependencies and running tests with coverage..."
-    dir('frontend') {
-        sh '''
-            npm install
-            npm install --save-dev @testing-library/react@12.1.5 @testing-library/jest-dom@5.16.5
-            npm test -- --coverage --watchAll=false
-        '''
-    }
+    echo "Running React unit tests with coverage at root level..."
+    sh '''
+        npm install
+        npm install --save-dev @testing-library/react@12.1.5 @testing-library/jest-dom@5.16.5
+        npm test -- --coverage --watchAll=false
+    '''
 }
