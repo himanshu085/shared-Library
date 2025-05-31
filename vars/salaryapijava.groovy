@@ -1,7 +1,3 @@
-def call() {
-    echo "Running Salary API Java pipeline stages..."
-}
-
 def checkoutCode() {
     echo "Checking out Salary API Java repository..."
     checkout([$class: 'GitSCM',
@@ -53,9 +49,9 @@ def notify(status, priority, slackChannel, emailRecipients) {
     def message = """${icons[status]} ${priority} ${status}: ${results[priority][status]}
 Job: '${env.JOB_NAME} [${env.BUILD_NUMBER}]' <${env.BUILD_URL}|Details>
 Coverage Report: ${coverageUrl}"""
-    
+
     slackSend(channel: slackChannel, color: colors[status], message: message)
-    
+
     try {
         mail(to: emailRecipients, subject: subjects[status], body: "${message}\n\nCheck details here: ${env.BUILD_URL}")
     } catch (err) {
