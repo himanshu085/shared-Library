@@ -64,6 +64,19 @@ def runDASTScan(String zapDir, String targetUrl, String reportPath) {
     """
 }
 
+def publishDASTReport(String reportPath) {
+    echo "Publishing OWASP ZAP DAST report..."
+    publishHTML(target: [
+        reportDir: "${reportPath}".replaceAll('/[^/]+$', ''), // extract directory from full path
+        reportFiles: "${reportPath}".replaceAll('.*/', ''),   // extract filename from full path
+        reportName: 'DAST Report',
+        keepAll: true,
+        allowMissing: false,
+        alwaysLinkToLastBuild: true
+    ])
+}
+
+
 def notify(status, priority, slackChannel, emailRecipients) {
     def icons = [SUCCESS: '🟢', FAILURE: '🔴']
     def results = [
