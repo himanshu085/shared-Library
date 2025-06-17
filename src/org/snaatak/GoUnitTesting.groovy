@@ -34,6 +34,7 @@ class GoUnitTesting implements Serializable {
     def runTestsAndGenerateReports() {
         steps.stage('Run Tests and Generate Reports') {
             steps.sh '''
+                export PATH=$HOME/go/bin:$PATH
                 mkdir -p test-reports coverage-reports
                 go test -v -coverprofile=coverage-reports/coverage.out ./... | go-junit-report > test-reports/report.xml
                 go tool cover -html=coverage-reports/coverage.out -o coverage-reports/coverage.html
