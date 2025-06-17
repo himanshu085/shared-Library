@@ -9,12 +9,18 @@ class GoUnitTesting implements Serializable {
         this.steps = steps
     }
 
-    def checkoutCode(String branch = 'main', String repoUrl = '', String credentialsId = '') {
+    def checkoutCode(String branch = 'main') {
+        def repoUrl = steps.env.REPO_URL
+        def credentialsId = steps.env.CREDENTIAL_ID
+
         steps.stage('Checkout') {
             steps.echo "Checking out branch '${branch}' from '${repoUrl}'"
             steps.checkout([$class: 'GitSCM',
                 branches: [[name: "*/${branch}"]],
-                userRemoteConfigs: [[url: repoUrl, credentialsId: credentialsId]]
+                userRemoteConfigs: [[
+                    url: repoUrl,
+                    credentialsId: credentialsId
+                ]]
             ])
         }
     }
