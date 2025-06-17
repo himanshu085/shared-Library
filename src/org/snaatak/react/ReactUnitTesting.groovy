@@ -50,7 +50,7 @@ class ReactUnitTesting implements Serializable {
     def publishCoverage() {
         steps.stage('Publish Coverage Report') {
             steps.publishHTML(target: [
-                reportDir: 'frontend/coverage/lcov-report',
+                reportDir: 'coverage/lcov-report',
                 reportFiles: 'index.html',
                 reportName: 'React Test Coverage Report'
             ])
