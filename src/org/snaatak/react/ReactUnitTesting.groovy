@@ -110,16 +110,4 @@ ${icons[status]} *${priority} ${status}*
         steps.slackSend(channel: slackChannel, color: colors[status], message: slackMessage)
         steps.mail(to: emailRecipients, subject: subjects[status], body: emailBody, mimeType: 'text/html')
     }
-
-    def executePipeline(Map config = [:]) {
-        def branch = config.get('branch', 'main')
-        def repoUrl = config.get('repoUrl', 'https://github.com/Cloud-NInja-snaatak/frontend-api.git')
-        def credentialsId = config.get('credentialsId', 'himanshu-git-credential')
-
-        checkoutCode(branch, repoUrl, credentialsId)
-        installDependencies()
-        runUnitTests()
-        generateCoverage()
-        publishCoverage()
-    }
 }
