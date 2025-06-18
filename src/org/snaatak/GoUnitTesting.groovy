@@ -60,7 +60,6 @@ class GoUnitTesting implements Serializable {
     def archiveAndCleanup() {
         steps.stage('Cleanup') {
             steps.echo "Cleaning up workspace"
-            // Don't archive here; do it in `post.always`
         }
     }
 }
