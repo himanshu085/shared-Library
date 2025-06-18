@@ -58,10 +58,9 @@ class GoUnitTesting implements Serializable {
     }
 
     def archiveAndCleanup() {
-        steps.stage('Archive and Cleanup') {
-            steps.archiveArtifacts artifacts: '**/coverage.out, **/coverage.html', fingerprint: true
+        steps.stage('Cleanup') {
             steps.echo "Cleaning up workspace"
-            steps.deleteDir()
+            // Don't archive here; do it in `post.always`
         }
     }
 }
