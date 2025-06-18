@@ -1,7 +1,5 @@
 package org.snaatak.react
 
-import java.text.SimpleDateFormat
-
 class ReactUnitTesting implements Serializable {
     def steps
 
@@ -40,7 +38,7 @@ class ReactUnitTesting implements Serializable {
     }
 
     def generateCoverage() {
-        steps.stage('Generate Coverage Report') {
+        steps.stage('Generate Report') {
             steps.dir('frontend') {
                 steps.sh 'npm test -- --coverage --coverageDirectory=coverage --watchAll=false || true'
             }
@@ -48,11 +46,12 @@ class ReactUnitTesting implements Serializable {
     }
 
     def publishCoverage() {
-        steps.stage('Publish Coverage Report') {
+        steps.stage('Publish Report') {
             steps.publishHTML(target: [
                 reportDir: 'coverage/lcov-report',
                 reportFiles: 'index.html',
-                reportName: 'React Test Coverage Report'
+                reportName: 'React Test Report'
             ])
         }
     }
+}
